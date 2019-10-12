@@ -241,7 +241,9 @@
             this.ClientSize = new System.Drawing.Size(1084, 737);
             this.Controls.Add(this.tableLayout);
             this.Controls.Add(this.menu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Picture Viewer - Phong kham 158";
