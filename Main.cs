@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace PictureViewer
         private Bitmap sourceImg = null;
         private String pathTemp = null;
         private String currPath = null;
+
+        bool manualCrop = false;
+        int cropX;
+        int cropY;
+        int cropWidth;
+        int cropHeight;
+        public Pen cropPen = new Pen(Color.DarkGray, 1);
+        public DashStyle cropDashStyle = DashStyle.DashDot;
+
         public Main()
         {
             InitializeComponent();
@@ -25,6 +35,8 @@ namespace PictureViewer
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
             buttonUndo.Enabled = false;
+            buttonCropManual.Enabled = false;
+            buttonSelectArea.Enabled = false;
         }
 
         public Main(String fileStr)
@@ -42,6 +54,8 @@ namespace PictureViewer
                 buttonCropNormal.Enabled = true;
                 buttonCropFace.Enabled = true;
                 buttonUndo.Enabled = false;
+                buttonCropManual.Enabled = false;
+                buttonSelectArea.Enabled = true;
             }
         }
 
@@ -62,6 +76,8 @@ namespace PictureViewer
                 buttonCropNormal.Enabled = true;
                 buttonCropFace.Enabled = true;
                 buttonUndo.Enabled = false;
+                buttonSelectArea.Enabled = true;
+                buttonCropManual.Enabled = false;
             }
         }
 
@@ -141,6 +157,100 @@ namespace PictureViewer
             {
                 File.Delete(pathTemp);
             }
+        }
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (manualCrop)
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                {
+                    Cursor = Cursors.Cross;
+                    cropX = e.X;
+                    cropY = e.Y;
+                    cropPen = new Pen(Color.DarkGray, 1);
+                    cropPen.DashStyle = DashStyle.DashDotDot;
+                }
+                pictureBox.Refresh();
+            }
+        }
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (manualCrop)
+            {
+                if (pictureBox.Image == null)
+                {
+                    return;
+                }
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                {
+                    pictureBox.Refresh();
+                    cropWidth = e.X - cropX;
+                    cropHeight = e.Y - cropY;
+                    pictureBox.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
+                }
+            }
+        }
+
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (manualCrop)
+            {
+                pictureBox.Refresh();
+                Cursor = Cursors.Default;
+                cropPen = new Pen(Color.Gray, 1);
+                cropPen.DashStyle = DashStyle.DashDotDot;
+                cropWidth = e.X - cropX;
+                cropHeight = e.Y - cropY;
+                pictureBox.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
+                buttonCropManual.Enabled = true;
+            }
+        }
+
+        private void buttonSelectArea_Click(object sender, EventArgs e)
+        {
+            pictureBox.Refresh();
+            manualCrop = !manualCrop;
+            buttonCropManual.Enabled = !buttonCropManual.Enabled;
+            if (manualCrop)
+            {
+                buttonSelectArea.BackColor = Color.DarkGray;
+            }
+            else
+            {
+                buttonSelectArea.BackColor = default(Color);
+            }
+            buttonCropManual.Enabled = false;
+        }
+
+        private void buttonCropManual_Click(object sender, EventArgs e)
+        {
+            manualCrop = false;
+            buttonSelectArea.BackColor = default(Color);
+            pictureBox.Refresh();
+            buttonCropManual.Enabled = false;
+
+            sourceImg = pictureBox.Image as Bitmap;
+
+            Size clientSize = pictureBox.ClientSize;
+            float ratio = ((float)sourceImg.Width) / ((float)clientSize.Width);
+            cropX = (int)(cropX * ratio);
+            cropY = (int)(cropY * ratio);
+            cropWidth = (int)(cropWidth * ratio);
+            cropHeight = (int)(cropHeight * ratio);
+
+            Rectangle cropRect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
+            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
+            using (Graphics g = Graphics.FromImage(target))
+            {
+                g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+            }
+            target.Save(pathTemp, ImageFormat.Png);
+            pictureBox.Image = target;
+            buttonCropNormal.Enabled = false;
+            buttonCropFace.Enabled = false;
+            buttonUndo.Enabled = true;
         }
     }
 }

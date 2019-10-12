@@ -36,12 +36,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.buttonSelectArea = new System.Windows.Forms.Button();
+            this.buttonCropManual = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonCropNormal = new System.Windows.Forms.Button();
             this.buttonCropFace = new System.Windows.Forms.Button();
             this.buttonUndo = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -71,26 +73,26 @@
             // openItemMenu
             // 
             this.openItemMenu.Name = "openItemMenu";
-            this.openItemMenu.Size = new System.Drawing.Size(180, 22);
+            this.openItemMenu.Size = new System.Drawing.Size(103, 22);
             this.openItemMenu.Text = "Open";
             this.openItemMenu.Click += new System.EventHandler(this.openItemMenu_Click);
             // 
             // prinyItemMenu
             // 
             this.prinyItemMenu.Name = "prinyItemMenu";
-            this.prinyItemMenu.Size = new System.Drawing.Size(180, 22);
+            this.prinyItemMenu.Size = new System.Drawing.Size(103, 22);
             this.prinyItemMenu.Text = "Print";
             this.prinyItemMenu.Click += new System.EventHandler(this.prinyItemMenu_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
             // 
             // exitItemMenu
             // 
             this.exitItemMenu.Name = "exitItemMenu";
-            this.exitItemMenu.Size = new System.Drawing.Size(180, 22);
+            this.exitItemMenu.Size = new System.Drawing.Size(103, 22);
             this.exitItemMenu.Text = "Exit";
             this.exitItemMenu.Click += new System.EventHandler(this.exitItemMenu_Click);
             // 
@@ -101,6 +103,8 @@
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.Controls.Add(this.buttonSelectArea, 0, 2);
+            this.tableLayout.Controls.Add(this.buttonCropManual, 0, 2);
             this.tableLayout.Controls.Add(this.pictureBox, 0, 1);
             this.tableLayout.Controls.Add(this.buttonPrint, 0, 0);
             this.tableLayout.Controls.Add(this.buttonCropNormal, 1, 0);
@@ -109,11 +113,49 @@
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 24);
             this.tableLayout.Name = "tableLayout";
-            this.tableLayout.RowCount = 2;
+            this.tableLayout.RowCount = 3;
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayout.Size = new System.Drawing.Size(1146, 713);
             this.tableLayout.TabIndex = 0;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // buttonSelectArea
+            // 
+            this.tableLayout.SetColumnSpan(this.buttonSelectArea, 2);
+            this.buttonSelectArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSelectArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.buttonSelectArea.Image = global::PictureViewer.Properties.Resources.select;
+            this.buttonSelectArea.Location = new System.Drawing.Point(3, 666);
+            this.buttonSelectArea.Name = "buttonSelectArea";
+            this.buttonSelectArea.Size = new System.Drawing.Size(566, 44);
+            this.buttonSelectArea.TabIndex = 6;
+            this.buttonSelectArea.Text = "Chọn vùng";
+            this.buttonSelectArea.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSelectArea.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSelectArea.UseVisualStyleBackColor = true;
+            this.buttonSelectArea.Click += new System.EventHandler(this.buttonSelectArea_Click);
+            // 
+            // buttonCropManual
+            // 
+            this.tableLayout.SetColumnSpan(this.buttonCropManual, 2);
+            this.buttonCropManual.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCropManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.buttonCropManual.Image = global::PictureViewer.Properties.Resources.crop_VBF_icon;
+            this.buttonCropManual.Location = new System.Drawing.Point(575, 666);
+            this.buttonCropManual.Name = "buttonCropManual";
+            this.buttonCropManual.Size = new System.Drawing.Size(568, 44);
+            this.buttonCropManual.TabIndex = 5;
+            this.buttonCropManual.Text = "Cắt thủ công";
+            this.buttonCropManual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonCropManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonCropManual.UseVisualStyleBackColor = true;
+            this.buttonCropManual.Click += new System.EventHandler(this.buttonCropManual_Click);
             // 
             // pictureBox
             // 
@@ -123,11 +165,14 @@
             this.pictureBox.Image = global::PictureViewer.Properties.Resources.picture;
             this.pictureBox.Location = new System.Drawing.Point(3, 53);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(1140, 657);
+            this.pictureBox.Size = new System.Drawing.Size(1140, 607);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.WaitOnLoad = true;
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             // 
             // buttonPrint
             // 
@@ -189,10 +234,6 @@
             this.buttonUndo.UseVisualStyleBackColor = true;
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,6 +270,8 @@
         private System.Windows.Forms.Button buttonCropFace;
         private System.Windows.Forms.Button buttonUndo;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button buttonSelectArea;
+        private System.Windows.Forms.Button buttonCropManual;
     }
 }
 

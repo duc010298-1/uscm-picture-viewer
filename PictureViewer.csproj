@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\select.ico" />
     <None Include="Resources\undo_arrow_gGY_icon.ico" />
     <None Include="Resources\crop_VBF_icon.ico" />
     <None Include="Resources\print_o4k_icon.ico" />
