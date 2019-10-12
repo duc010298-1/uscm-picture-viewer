@@ -233,12 +233,13 @@ namespace PictureViewer
 
             sourceImg = pictureBox.Image as Bitmap;
 
-            Size clientSize = pictureBox.ClientSize;
-            float ratio = ((float)sourceImg.Width) / ((float)clientSize.Width);
-            cropX = (int)(cropX * ratio);
-            cropY = (int)(cropY * ratio);
-            cropWidth = (int)(cropWidth * ratio);
-            cropHeight = (int)(cropHeight * ratio);
+            Size clientSize = pictureBox.Size;
+            float ratioWidth = ((float)sourceImg.Width) / ((float)clientSize.Width);
+            float ratioHeight = ((float)sourceImg.Height) / ((float)clientSize.Height);
+            cropX = (int)(Math.Round(cropX * ratioWidth));
+            cropY = (int)(Math.Round(cropY * ratioHeight));
+            cropWidth = (int)(Math.Round(cropWidth * ratioWidth));
+            cropHeight = (int)(Math.Round(cropHeight * ratioHeight));
 
             Rectangle cropRect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
