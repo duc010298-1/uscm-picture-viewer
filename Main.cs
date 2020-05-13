@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,6 +38,7 @@ namespace PictureViewer
             buttonUndo.Enabled = false;
             buttonCropManual.Enabled = false;
             buttonSelectArea.Enabled = false;
+            buttonOpenPhotoshop.Enabled = false;
         }
 
         public Main(String fileStr)
@@ -51,6 +53,7 @@ namespace PictureViewer
                 pictureBox.Load(fileStr);
                 pathTemp = Path.GetDirectoryName(fileStr) + "\\temp.png";
                 buttonPrint.Enabled = true;
+                buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
                 buttonCropFace.Enabled = true;
                 buttonUndo.Enabled = false;
@@ -73,6 +76,7 @@ namespace PictureViewer
                 pictureBox.Load(currPath);
                 pathTemp = Path.GetDirectoryName(currPath) + "\\temp.png";
                 buttonPrint.Enabled = true;
+                buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
                 buttonCropFace.Enabled = true;
                 buttonUndo.Enabled = false;
@@ -252,6 +256,58 @@ namespace PictureViewer
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
             buttonUndo.Enabled = true;
+        }
+
+        private void buttonOpenPhotoshop_Click(object sender, EventArgs e)
+        {
+            String photoshopLocation = (String)Registry.CurrentUser.OpenSubKey("Software\\Classes\\Applications\\PictureViewer.exe\\PhotoshopLocation", true).GetValue("path");
+            if (photoshopLocation == "null")
+            {
+                MessageBox.Show("Bạn chưa thiết lập vị trí của photoshop",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            if (!File.Exists(photoshopLocation))
+            {
+                MessageBox.Show("Đường dẫn photoshop không tồn tại, vui lòng đặt lại",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            if (currPath == null || pathTemp == null)
+            {
+                MessageBox.Show("Không có ảnh để in");
+                return;
+            }
+
+            var p = new Process();
+            p.StartInfo.FileName = photoshopLocation;
+            if (buttonUndo.Enabled)
+            {
+                p.StartInfo.Arguments = pathTemp;
+            }
+            else
+            {
+                p.StartInfo.Arguments = currPath;
+            }
+            p.Start();
+        }
+
+        private void setPhotoshopLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Registry.CurrentUser.OpenSubKey("Software\\Classes\\Applications\\PictureViewer.exe\\PhotoshopLocation", true)
+                    .SetValue("path", openFileDialog.FileName);
+                MessageBox.Show("Thiết lập vị trí của photoshop thành công",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
         }
     }
 }

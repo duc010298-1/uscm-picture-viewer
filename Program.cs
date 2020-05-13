@@ -44,6 +44,7 @@ namespace PictureViewer
             appReg.CreateSubKey("shell\\open\\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
             appReg.CreateSubKey("shell\\edit\\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
             appReg.CreateSubKey("DefaultIcon").SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
+            appReg.CreateSubKey("PhotoshopLocation").SetValue("path", "null");
 
             Registry.CurrentUser.OpenSubKey("Software\\Classes\\.jpg\\DefaultIcon", true).SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
             Registry.CurrentUser.OpenSubKey("Software\\Classes\\.bmp\\DefaultIcon", true).SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");

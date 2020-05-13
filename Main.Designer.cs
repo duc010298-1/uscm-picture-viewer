@@ -37,7 +37,6 @@
             this.exitItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.buttonOpenPhotoshop = new System.Windows.Forms.Button();
             this.buttonSelectArea = new System.Windows.Forms.Button();
             this.buttonCropManual = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -45,6 +44,8 @@
             this.buttonCropNormal = new System.Windows.Forms.Button();
             this.buttonCropFace = new System.Windows.Forms.Button();
             this.buttonUndo = new System.Windows.Forms.Button();
+            this.buttonOpenPhotoshop = new System.Windows.Forms.Button();
+            this.setPhotoshopLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -65,6 +66,7 @@
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openItemMenu,
             this.prinyItemMenu,
+            this.setPhotoshopLocationToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitItemMenu});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
@@ -74,26 +76,26 @@
             // openItemMenu
             // 
             this.openItemMenu.Name = "openItemMenu";
-            this.openItemMenu.Size = new System.Drawing.Size(103, 22);
+            this.openItemMenu.Size = new System.Drawing.Size(200, 22);
             this.openItemMenu.Text = "Open";
             this.openItemMenu.Click += new System.EventHandler(this.openItemMenu_Click);
             // 
             // prinyItemMenu
             // 
             this.prinyItemMenu.Name = "prinyItemMenu";
-            this.prinyItemMenu.Size = new System.Drawing.Size(103, 22);
+            this.prinyItemMenu.Size = new System.Drawing.Size(200, 22);
             this.prinyItemMenu.Text = "Print";
             this.prinyItemMenu.Click += new System.EventHandler(this.prinyItemMenu_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
             // 
             // exitItemMenu
             // 
             this.exitItemMenu.Name = "exitItemMenu";
-            this.exitItemMenu.Size = new System.Drawing.Size(103, 22);
+            this.exitItemMenu.Size = new System.Drawing.Size(200, 22);
             this.exitItemMenu.Text = "Exit";
             this.exitItemMenu.Click += new System.EventHandler(this.exitItemMenu_Click);
             // 
@@ -122,25 +124,6 @@
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayout.Size = new System.Drawing.Size(1084, 713);
             this.tableLayout.TabIndex = 0;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // buttonOpenPhotoshop
-            // 
-            this.tableLayout.SetColumnSpan(this.buttonOpenPhotoshop, 2);
-            this.buttonOpenPhotoshop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonOpenPhotoshop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonOpenPhotoshop.Image = global::PictureViewer.Properties.Resources.squares_h0T_icon;
-            this.buttonOpenPhotoshop.Location = new System.Drawing.Point(545, 666);
-            this.buttonOpenPhotoshop.Name = "buttonOpenPhotoshop";
-            this.buttonOpenPhotoshop.Size = new System.Drawing.Size(536, 44);
-            this.buttonOpenPhotoshop.TabIndex = 7;
-            this.buttonOpenPhotoshop.Text = "Mở trong Photoshop";
-            this.buttonOpenPhotoshop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonOpenPhotoshop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonOpenPhotoshop.UseVisualStyleBackColor = true;
             // 
             // buttonSelectArea
             // 
@@ -249,6 +232,29 @@
             this.buttonUndo.UseVisualStyleBackColor = true;
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
+            // buttonOpenPhotoshop
+            // 
+            this.tableLayout.SetColumnSpan(this.buttonOpenPhotoshop, 2);
+            this.buttonOpenPhotoshop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonOpenPhotoshop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpenPhotoshop.Image = global::PictureViewer.Properties.Resources.squares_h0T_icon;
+            this.buttonOpenPhotoshop.Location = new System.Drawing.Point(545, 666);
+            this.buttonOpenPhotoshop.Name = "buttonOpenPhotoshop";
+            this.buttonOpenPhotoshop.Size = new System.Drawing.Size(536, 44);
+            this.buttonOpenPhotoshop.TabIndex = 7;
+            this.buttonOpenPhotoshop.Text = "Mở trong Photoshop";
+            this.buttonOpenPhotoshop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonOpenPhotoshop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonOpenPhotoshop.UseVisualStyleBackColor = true;
+            this.buttonOpenPhotoshop.Click += new System.EventHandler(this.buttonOpenPhotoshop_Click);
+            // 
+            // setPhotoshopLocationToolStripMenuItem
+            // 
+            this.setPhotoshopLocationToolStripMenuItem.Name = "setPhotoshopLocationToolStripMenuItem";
+            this.setPhotoshopLocationToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.setPhotoshopLocationToolStripMenuItem.Text = "Set Photoshop Location";
+            this.setPhotoshopLocationToolStripMenuItem.Click += new System.EventHandler(this.setPhotoshopLocationToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +296,7 @@
         private System.Windows.Forms.Button buttonSelectArea;
         private System.Windows.Forms.Button buttonCropManual;
         private System.Windows.Forms.Button buttonOpenPhotoshop;
+        private System.Windows.Forms.ToolStripMenuItem setPhotoshopLocationToolStripMenuItem;
     }
 }
 
