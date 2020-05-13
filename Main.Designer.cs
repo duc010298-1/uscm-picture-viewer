@@ -36,6 +36,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.buttonOpenPhotoshop = new System.Windows.Forms.Button();
             this.buttonSelectArea = new System.Windows.Forms.Button();
             this.buttonCropManual = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -43,7 +45,6 @@
             this.buttonCropNormal = new System.Windows.Forms.Button();
             this.buttonCropFace = new System.Windows.Forms.Button();
             this.buttonUndo = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -110,6 +111,7 @@
             this.tableLayout.Controls.Add(this.buttonCropNormal, 1, 0);
             this.tableLayout.Controls.Add(this.buttonCropFace, 2, 0);
             this.tableLayout.Controls.Add(this.buttonUndo, 3, 0);
+            this.tableLayout.Controls.Add(this.buttonOpenPhotoshop, 2, 2);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 24);
             this.tableLayout.Name = "tableLayout";
@@ -121,15 +123,33 @@
             this.tableLayout.Size = new System.Drawing.Size(1084, 713);
             this.tableLayout.TabIndex = 0;
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // buttonOpenPhotoshop
+            // 
+            this.tableLayout.SetColumnSpan(this.buttonOpenPhotoshop, 2);
+            this.buttonOpenPhotoshop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonOpenPhotoshop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpenPhotoshop.Image = global::PictureViewer.Properties.Resources.squares_h0T_icon;
+            this.buttonOpenPhotoshop.Location = new System.Drawing.Point(545, 666);
+            this.buttonOpenPhotoshop.Name = "buttonOpenPhotoshop";
+            this.buttonOpenPhotoshop.Size = new System.Drawing.Size(536, 44);
+            this.buttonOpenPhotoshop.TabIndex = 7;
+            this.buttonOpenPhotoshop.Text = "Mở trong Photoshop";
+            this.buttonOpenPhotoshop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonOpenPhotoshop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonOpenPhotoshop.UseVisualStyleBackColor = true;
+            // 
             // buttonSelectArea
             // 
-            this.tableLayout.SetColumnSpan(this.buttonSelectArea, 2);
             this.buttonSelectArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSelectArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonSelectArea.Image = global::PictureViewer.Properties.Resources.select;
-            this.buttonSelectArea.Location = new System.Drawing.Point(3, 666);
+            this.buttonSelectArea.Location = new System.Drawing.Point(274, 666);
             this.buttonSelectArea.Name = "buttonSelectArea";
-            this.buttonSelectArea.Size = new System.Drawing.Size(536, 44);
+            this.buttonSelectArea.Size = new System.Drawing.Size(265, 44);
             this.buttonSelectArea.TabIndex = 6;
             this.buttonSelectArea.Text = "Chọn vùng";
             this.buttonSelectArea.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -139,13 +159,12 @@
             // 
             // buttonCropManual
             // 
-            this.tableLayout.SetColumnSpan(this.buttonCropManual, 2);
             this.buttonCropManual.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCropManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonCropManual.Image = global::PictureViewer.Properties.Resources.crop_VBF_icon;
-            this.buttonCropManual.Location = new System.Drawing.Point(545, 666);
+            this.buttonCropManual.Location = new System.Drawing.Point(3, 666);
             this.buttonCropManual.Name = "buttonCropManual";
-            this.buttonCropManual.Size = new System.Drawing.Size(536, 44);
+            this.buttonCropManual.Size = new System.Drawing.Size(265, 44);
             this.buttonCropManual.TabIndex = 5;
             this.buttonCropManual.Text = "Cắt thủ công";
             this.buttonCropManual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -230,10 +249,6 @@
             this.buttonUndo.UseVisualStyleBackColor = true;
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,6 +289,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button buttonSelectArea;
         private System.Windows.Forms.Button buttonCropManual;
+        private System.Windows.Forms.Button buttonOpenPhotoshop;
     }
 }
 

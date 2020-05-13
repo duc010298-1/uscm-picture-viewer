@@ -124,13 +124,16 @@
   <data name="undo_arrow_gGY_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\undo_arrow_gGY_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="print_o4k_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\print_o4k_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\select.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="crop_VBF_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crop_VBF_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="select" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\select.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="print_o4k_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print_o4k_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="squares_h0T_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\squares_h0T_icon1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
