@@ -268,6 +268,7 @@ namespace PictureViewer
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+                return;
             }
             if (!File.Exists(photoshopLocation))
             {
@@ -276,6 +277,7 @@ namespace PictureViewer
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+                return;
             }
             if (currPath == null || pathTemp == null)
             {
