@@ -1,16 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PictureViewer
@@ -18,16 +12,15 @@ namespace PictureViewer
     public partial class Main : Form
     {
         private Bitmap sourceImg = null;
-        private String pathTemp = null;
-        private String currPath = null;
+        private string pathCrop = null;
+        private string currPath = null;
 
-        bool manualCrop = false;
-        int cropX;
-        int cropY;
-        int cropWidth;
-        int cropHeight;
-        public Pen cropPen = new Pen(Color.DarkGray, 1);
-        public DashStyle cropDashStyle = DashStyle.DashDot;
+        private bool manualCrop = false;
+        private int cropX;
+        private int cropY;
+        private int cropWidth;
+        private int cropHeight;
+        private Pen cropPen = new Pen(Color.DarkGray, 1);
 
         public Main()
         {
@@ -41,7 +34,7 @@ namespace PictureViewer
             buttonOpenPhotoshop.Enabled = false;
         }
 
-        public Main(String fileStr)
+        public Main(string fileStr)
         {
             InitializeComponent();
             FileInfo file = new FileInfo(fileStr);
@@ -51,7 +44,7 @@ namespace PictureViewer
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 currPath = fileStr;
                 pictureBox.Load(fileStr);
-                pathTemp = Path.GetDirectoryName(fileStr) + "\\temp.png";
+                pathCrop = string.Format(@"{0}\{1}_cắt{2}", Path.GetDirectoryName(fileStr), Path.GetFileNameWithoutExtension(fileStr), Path.GetExtension(fileStr));
                 buttonPrint.Enabled = true;
                 buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
@@ -62,19 +55,19 @@ namespace PictureViewer
             }
         }
 
-        private void buttonPrint_Click(object sender, EventArgs e)
+        private void ButtonPrint_Click(object sender, EventArgs e)
         {
-            print();
+            Print();
         }
 
-        private void openItemMenu_Click(object sender, EventArgs e)
+        private void OpenItemMenu_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 currPath = openFileDialog.FileName;
                 pictureBox.Load(currPath);
-                pathTemp = Path.GetDirectoryName(currPath) + "\\temp.png";
+                pathCrop = string.Format(@"{0}\{1}_cắt{2}", Path.GetDirectoryName(currPath), Path.GetFileNameWithoutExtension(currPath), Path.GetExtension(currPath));
                 buttonPrint.Enabled = true;
                 buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
@@ -85,27 +78,27 @@ namespace PictureViewer
             }
         }
 
-        private void prinyItemMenu_Click(object sender, EventArgs e)
+        private void PrinyItemMenu_Click(object sender, EventArgs e)
         {
-            print();
+            Print();
         }
 
-        private void exitItemMenu_Click(object sender, EventArgs e)
+        private void ExitItemMenu_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void print()
+        private void Print()
         {
             var p = new Process();
-            if (currPath == null || pathTemp == null)
+            if (currPath == null || pathCrop == null)
             {
                 MessageBox.Show("Không có ảnh để in");
                 return;
             }
             if (buttonUndo.Enabled)
             {
-                p.StartInfo.FileName = pathTemp;
+                p.StartInfo.FileName = pathCrop;
             }
             else
             {
@@ -115,7 +108,7 @@ namespace PictureViewer
             p.Start();
         }
 
-        private void buttonCropNormal_Click(object sender, EventArgs e)
+        private void ButtonCropNormal_Click(object sender, EventArgs e)
         {
             sourceImg = pictureBox.Image as Bitmap;
             Rectangle cropRect = new Rectangle(500, 105, 1005, 676);
@@ -124,14 +117,14 @@ namespace PictureViewer
             {
                 g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathTemp, ImageFormat.Png);
+            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonUndo.Enabled = true;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
         }
 
-        private void buttonCropFace_Click(object sender, EventArgs e)
+        private void ButtonCropFace_Click(object sender, EventArgs e)
         {
             sourceImg = pictureBox.Image as Bitmap;
             Rectangle cropRect = new Rectangle(530, 65, 850, 850);
@@ -140,14 +133,14 @@ namespace PictureViewer
             {
                 g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathTemp, ImageFormat.Png);
+            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
             buttonUndo.Enabled = true;
         }
 
-        private void buttonUndo_Click(object sender, EventArgs e)
+        private void ButtonUndo_Click(object sender, EventArgs e)
         {
             pictureBox.Image = sourceImg;
             buttonCropNormal.Enabled = true;
@@ -155,15 +148,7 @@ namespace PictureViewer
             buttonUndo.Enabled = false;
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (File.Exists(pathTemp))
-            {
-                File.Delete(pathTemp);
-            }
-        }
-
-        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (manualCrop)
             {
@@ -172,14 +157,16 @@ namespace PictureViewer
                     Cursor = Cursors.Cross;
                     cropX = e.X;
                     cropY = e.Y;
-                    cropPen = new Pen(Color.DarkGray, 1);
-                    cropPen.DashStyle = DashStyle.DashDotDot;
+                    cropPen = new Pen(Color.DarkGray, 1)
+                    {
+                        DashStyle = DashStyle.DashDotDot
+                    };
                 }
                 pictureBox.Refresh();
             }
         }
 
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (manualCrop)
             {
@@ -197,14 +184,16 @@ namespace PictureViewer
             }
         }
 
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (manualCrop)
             {
                 pictureBox.Refresh();
                 Cursor = Cursors.Default;
-                cropPen = new Pen(Color.Gray, 1);
-                cropPen.DashStyle = DashStyle.DashDotDot;
+                cropPen = new Pen(Color.Gray, 1)
+                {
+                    DashStyle = DashStyle.DashDotDot
+                };
                 cropWidth = e.X - cropX;
                 cropHeight = e.Y - cropY;
                 pictureBox.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
@@ -212,7 +201,7 @@ namespace PictureViewer
             }
         }
 
-        private void buttonSelectArea_Click(object sender, EventArgs e)
+        private void ButtonSelectArea_Click(object sender, EventArgs e)
         {
             pictureBox.Refresh();
             manualCrop = !manualCrop;
@@ -223,15 +212,15 @@ namespace PictureViewer
             }
             else
             {
-                buttonSelectArea.BackColor = default(Color);
+                buttonSelectArea.BackColor = default;
             }
             buttonCropManual.Enabled = false;
         }
 
-        private void buttonCropManual_Click(object sender, EventArgs e)
+        private void ButtonCropManual_Click(object sender, EventArgs e)
         {
             manualCrop = false;
-            buttonSelectArea.BackColor = default(Color);
+            buttonSelectArea.BackColor = default;
             pictureBox.Refresh();
             buttonCropManual.Enabled = false;
 
@@ -251,17 +240,17 @@ namespace PictureViewer
             {
                 g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathTemp, ImageFormat.Png);
+            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
             buttonUndo.Enabled = true;
         }
 
-        private void buttonOpenPhotoshop_Click(object sender, EventArgs e)
+        private void ButtonOpenPhotoshop_Click(object sender, EventArgs e)
         {
-            String photoshopLocation = (String)Registry.CurrentUser.OpenSubKey("Software\\Classes\\Applications\\PictureViewer.exe\\PhotoshopLocation", true).GetValue("path");
-            if (photoshopLocation == "null")
+            var subKey = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\PhotoshopLocation", true);
+            if (subKey == null)
             {
                 MessageBox.Show("Bạn chưa thiết lập vị trí của photoshop",
                     "Lỗi",
@@ -270,6 +259,7 @@ namespace PictureViewer
                 );
                 return;
             }
+            string photoshopLocation = (string)subKey.GetValue("path");
             if (!File.Exists(photoshopLocation))
             {
                 MessageBox.Show("Đường dẫn photoshop không tồn tại, vui lòng đặt lại",
@@ -279,9 +269,9 @@ namespace PictureViewer
                 );
                 return;
             }
-            if (currPath == null || pathTemp == null)
+            if (currPath == null || pathCrop == null)
             {
-                MessageBox.Show("Không có ảnh để in");
+                MessageBox.Show("Không có ảnh để mở");
                 return;
             }
 
@@ -289,7 +279,7 @@ namespace PictureViewer
             p.StartInfo.FileName = photoshopLocation;
             if (buttonUndo.Enabled)
             {
-                p.StartInfo.Arguments = pathTemp;
+                p.StartInfo.Arguments = pathCrop;
             }
             else
             {
@@ -298,11 +288,11 @@ namespace PictureViewer
             p.Start();
         }
 
-        private void setPhotoshopLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SetPhotoshopLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Registry.CurrentUser.OpenSubKey("Software\\Classes\\Applications\\PictureViewer.exe\\PhotoshopLocation", true)
+                Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\PhotoshopLocation", true)
                     .SetValue("path", openFileDialog.FileName);
                 MessageBox.Show("Thiết lập vị trí của photoshop thành công",
                     "Thông báo",

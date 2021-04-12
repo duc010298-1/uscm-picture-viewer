@@ -63,9 +63,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap crop_VBF_icon {
+        internal static System.Drawing.Bitmap crop_icon {
             get {
-                object obj = ResourceManager.GetObject("crop_VBF_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("crop_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap picture {
+        internal static System.Drawing.Bitmap no_image {
             get {
-                object obj = ResourceManager.GetObject("picture", resourceCulture);
+                object obj = ResourceManager.GetObject("no_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap print_o4k_icon {
+        internal static System.Drawing.Bitmap photoshop_icon {
             get {
-                object obj = ResourceManager.GetObject("print_o4k_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("photoshop_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap select {
+        internal static System.Drawing.Bitmap print_icon {
             get {
-                object obj = ResourceManager.GetObject("select", resourceCulture);
+                object obj = ResourceManager.GetObject("print_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap squares_h0T_icon {
+        internal static System.Drawing.Bitmap select_icon {
             get {
-                object obj = ResourceManager.GetObject("squares_h0T_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("select_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace PictureViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap undo_arrow_gGY_icon {
+        internal static System.Drawing.Bitmap undo_icon {
             get {
-                object obj = ResourceManager.GetObject("undo_arrow_gGY_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("undo_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

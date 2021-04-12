@@ -62,18 +62,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -85,12 +85,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <None Include="Resources\squares_h0T_icon1.ico" />
-    <None Include="Resources\select.ico" />
-    <None Include="Resources\undo_arrow_gGY_icon.ico" />
-    <None Include="Resources\crop_VBF_icon.ico" />
-    <None Include="Resources\print_o4k_icon.ico" />
-    <None Include="Resources\picture.png" />
+    <Content Include="ultrasound.ico" />
+    <None Include="Resources\photoshop_icon.ico" />
+    <None Include="Resources\select_icon.ico" />
+    <None Include="Resources\undo_icon.ico" />
+    <None Include="Resources\crop_icon.ico" />
+    <None Include="Resources\print_icon.ico" />
+    <None Include="Resources\no_image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

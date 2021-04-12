@@ -15,9 +15,9 @@ namespace PictureViewer
         [STAThread]
         static void Main(String[] args)
         {
-            if (checkRegistry())
+            if (CheckRegistry())
             {
-                addRegistry();
+                AddRegistry();
             }
 
             Application.EnableVisualStyles();
@@ -33,22 +33,22 @@ namespace PictureViewer
             }
         }
 
-        public static bool checkRegistry()
+        public static bool CheckRegistry()
         {
-            return Registry.CurrentUser.OpenSubKey("Software\\Classes\\Applications\\PictureViewer.exe") == null;
+            return Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe") == null;
         }
 
-        public static void addRegistry()
+        public static void AddRegistry()
         {
-            RegistryKey appReg = Registry.CurrentUser.CreateSubKey("Software\\Classes\\Applications\\PictureViewer.exe");
-            appReg.CreateSubKey("shell\\open\\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
-            appReg.CreateSubKey("shell\\edit\\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
-            appReg.CreateSubKey("DefaultIcon").SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
-            appReg.CreateSubKey("PhotoshopLocation").SetValue("path", "null");
+            //RegistryKey appReg = Registry.CurrentUser.CreateSubKey(@"Software\Classes\Applications\PictureViewer.exe");
+            //appReg.CreateSubKey(@"shell\open\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
+            //appReg.CreateSubKey(@"shell\edit\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
+            //appReg.CreateSubKey("DefaultIcon").SetValue("", @"C:\Program Files\Picture Viewer\resource\icon.ico");
+            //appReg.CreateSubKey("PhotoshopLocation").SetValue("path", "null");
 
-            Registry.CurrentUser.OpenSubKey("Software\\Classes\\.jpg\\DefaultIcon", true).SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
-            Registry.CurrentUser.OpenSubKey("Software\\Classes\\.bmp\\DefaultIcon", true).SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
-            Registry.CurrentUser.OpenSubKey("Software\\Classes\\.png\\DefaultIcon", true).SetValue("", "C:\\Program Files\\Picture Viewer\\resource\\icon.ico");
+            //Registry.CurrentUser.OpenSubKey(@"Software\Classes\.jpg\DefaultIcon", true).SetValue("", @"C:\Program Files\Picture Viewer\resource\icon.ico");
+            //Registry.CurrentUser.OpenSubKey(@"Software\Classes\.bmp\DefaultIcon", true).SetValue("", @"C:\Program Files\Picture Viewer\resource\icon.ico");
+            //Registry.CurrentUser.OpenSubKey(@"Software\Classes\.png\DefaultIcon", true).SetValue("", @"C:\Program Files\Picture Viewer\resource\icon.ico");
         }
     }
 }
