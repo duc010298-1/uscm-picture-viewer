@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>pictureviewer.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -84,8 +84,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
-    <Content Include="ultrasound.ico" />
+    <Content Include="pictureviewer.ico" />
+    <Content Include="Resources\ultrasound.ico" />
     <None Include="Resources\photoshop_icon.ico" />
     <None Include="Resources\select_icon.ico" />
     <None Include="Resources\undo_icon.ico" />
