@@ -301,5 +301,13 @@ namespace PictureViewer
                 );
             }
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (File.Exists(pathCrop))
+            {
+                File.Delete(pathCrop);
+            }
+        }
     }
 }

@@ -268,6 +268,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trình xem ảnh - Phòng khám 158";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.tableLayout.ResumeLayout(false);
