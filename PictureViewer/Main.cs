@@ -44,7 +44,7 @@ namespace PictureViewer
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 currPath = fileStr;
                 pictureBox.Load(fileStr);
-                pathCrop = string.Format(@"{0}\{1}_cắt{2}", Path.GetDirectoryName(fileStr), Path.GetFileNameWithoutExtension(fileStr), Path.GetExtension(fileStr));
+                pathCrop = Path.GetDirectoryName(currPath) + "\\temp.png";
                 buttonPrint.Enabled = true;
                 buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
@@ -67,7 +67,7 @@ namespace PictureViewer
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 currPath = openFileDialog.FileName;
                 pictureBox.Load(currPath);
-                pathCrop = string.Format(@"{0}\{1}_cắt{2}", Path.GetDirectoryName(currPath), Path.GetFileNameWithoutExtension(currPath), Path.GetExtension(currPath));
+                pathCrop = Path.GetDirectoryName(currPath) + "\\temp.png";
                 buttonPrint.Enabled = true;
                 buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
