@@ -111,7 +111,7 @@ namespace PictureViewer
         private void ButtonCropNormal_Click(object sender, EventArgs e)
         {
             sourceImg = pictureBox.Image as Bitmap;
-            Rectangle cropRect = new Rectangle(500, 105, 1005, 676);
+            Rectangle cropRect = new Rectangle(500, 105, 1005, 710);
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
