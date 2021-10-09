@@ -108,13 +108,21 @@
             // 
             // tableLayout
             // 
-            this.tableLayout.ColumnCount = 4;
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayout.ColumnCount = 12;
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
             this.tableLayout.Controls.Add(this.buttonSelectArea, 0, 2);
-            this.tableLayout.Controls.Add(this.buttonCropManual, 0, 2);
+            this.tableLayout.Controls.Add(this.buttonCropManual, 1, 2);
             this.tableLayout.Controls.Add(this.pictureBox, 0, 1);
             this.tableLayout.Controls.Add(this.buttonPrint, 0, 0);
             this.tableLayout.Controls.Add(this.buttonCropNormal, 1, 0);
@@ -128,20 +136,20 @@
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayout.Size = new System.Drawing.Size(1084, 713);
             this.tableLayout.TabIndex = 0;
             // 
             // buttonSelectArea
             // 
+            this.tableLayout.SetColumnSpan(this.buttonSelectArea, 4);
             this.buttonSelectArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSelectArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonSelectArea.Image = global::PictureViewer.Properties.Resources.select_icon;
-            this.buttonSelectArea.Location = new System.Drawing.Point(274, 666);
+            this.buttonSelectArea.Location = new System.Drawing.Point(3, 666);
             this.buttonSelectArea.Name = "buttonSelectArea";
-            this.buttonSelectArea.Size = new System.Drawing.Size(265, 44);
+            this.buttonSelectArea.Size = new System.Drawing.Size(354, 44);
             this.buttonSelectArea.TabIndex = 6;
-            this.buttonSelectArea.Text = "Chọn vùng";
+            this.buttonSelectArea.Text = "Chọn vùng cắt";
             this.buttonSelectArea.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonSelectArea.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSelectArea.UseVisualStyleBackColor = true;
@@ -149,14 +157,15 @@
             // 
             // buttonCropManual
             // 
+            this.tableLayout.SetColumnSpan(this.buttonCropManual, 4);
             this.buttonCropManual.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCropManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonCropManual.Image = global::PictureViewer.Properties.Resources.crop_icon;
-            this.buttonCropManual.Location = new System.Drawing.Point(3, 666);
+            this.buttonCropManual.Location = new System.Drawing.Point(363, 666);
             this.buttonCropManual.Name = "buttonCropManual";
-            this.buttonCropManual.Size = new System.Drawing.Size(265, 44);
+            this.buttonCropManual.Size = new System.Drawing.Size(354, 44);
             this.buttonCropManual.TabIndex = 5;
-            this.buttonCropManual.Text = "Cắt thủ công";
+            this.buttonCropManual.Text = "Cắt vùng đã chọn";
             this.buttonCropManual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonCropManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCropManual.UseVisualStyleBackColor = true;
@@ -165,7 +174,7 @@
             // pictureBox
             // 
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayout.SetColumnSpan(this.pictureBox, 4);
+            this.tableLayout.SetColumnSpan(this.pictureBox, 12);
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Image = global::PictureViewer.Properties.Resources.no_image;
             this.pictureBox.Location = new System.Drawing.Point(3, 53);
@@ -181,12 +190,13 @@
             // 
             // buttonPrint
             // 
+            this.tableLayout.SetColumnSpan(this.buttonPrint, 3);
             this.buttonPrint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonPrint.Image = global::PictureViewer.Properties.Resources.print_icon;
             this.buttonPrint.Location = new System.Drawing.Point(3, 3);
             this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(265, 44);
+            this.buttonPrint.Size = new System.Drawing.Size(264, 44);
             this.buttonPrint.TabIndex = 1;
             this.buttonPrint.Text = "Print";
             this.buttonPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -196,12 +206,13 @@
             // 
             // buttonCropNormal
             // 
+            this.tableLayout.SetColumnSpan(this.buttonCropNormal, 3);
             this.buttonCropNormal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCropNormal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonCropNormal.Image = global::PictureViewer.Properties.Resources.crop_icon;
-            this.buttonCropNormal.Location = new System.Drawing.Point(274, 3);
+            this.buttonCropNormal.Location = new System.Drawing.Point(273, 3);
             this.buttonCropNormal.Name = "buttonCropNormal";
-            this.buttonCropNormal.Size = new System.Drawing.Size(265, 44);
+            this.buttonCropNormal.Size = new System.Drawing.Size(264, 44);
             this.buttonCropNormal.TabIndex = 2;
             this.buttonCropNormal.Text = "Cắt ảnh thường";
             this.buttonCropNormal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -211,12 +222,13 @@
             // 
             // buttonCropFace
             // 
+            this.tableLayout.SetColumnSpan(this.buttonCropFace, 3);
             this.buttonCropFace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCropFace.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonCropFace.Image = global::PictureViewer.Properties.Resources.crop_icon;
-            this.buttonCropFace.Location = new System.Drawing.Point(545, 3);
+            this.buttonCropFace.Location = new System.Drawing.Point(543, 3);
             this.buttonCropFace.Name = "buttonCropFace";
-            this.buttonCropFace.Size = new System.Drawing.Size(265, 44);
+            this.buttonCropFace.Size = new System.Drawing.Size(264, 44);
             this.buttonCropFace.TabIndex = 3;
             this.buttonCropFace.Text = "Cắt ảnh mặt";
             this.buttonCropFace.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -226,12 +238,13 @@
             // 
             // buttonUndo
             // 
+            this.tableLayout.SetColumnSpan(this.buttonUndo, 3);
             this.buttonUndo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.buttonUndo.Image = global::PictureViewer.Properties.Resources.undo_icon;
-            this.buttonUndo.Location = new System.Drawing.Point(816, 3);
+            this.buttonUndo.Location = new System.Drawing.Point(813, 3);
             this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(265, 44);
+            this.buttonUndo.Size = new System.Drawing.Size(268, 44);
             this.buttonUndo.TabIndex = 4;
             this.buttonUndo.Text = "Quay lại";
             this.buttonUndo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -241,15 +254,15 @@
             // 
             // buttonOpenPhotoshop
             // 
-            this.tableLayout.SetColumnSpan(this.buttonOpenPhotoshop, 2);
+            this.tableLayout.SetColumnSpan(this.buttonOpenPhotoshop, 4);
             this.buttonOpenPhotoshop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonOpenPhotoshop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOpenPhotoshop.Image = global::PictureViewer.Properties.Resources.photoshop_icon;
-            this.buttonOpenPhotoshop.Location = new System.Drawing.Point(545, 666);
+            this.buttonOpenPhotoshop.Location = new System.Drawing.Point(723, 666);
             this.buttonOpenPhotoshop.Name = "buttonOpenPhotoshop";
-            this.buttonOpenPhotoshop.Size = new System.Drawing.Size(536, 44);
+            this.buttonOpenPhotoshop.Size = new System.Drawing.Size(358, 44);
             this.buttonOpenPhotoshop.TabIndex = 7;
-            this.buttonOpenPhotoshop.Text = "Mở trong Photoshop";
+            this.buttonOpenPhotoshop.Text = "Photoshop";
             this.buttonOpenPhotoshop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonOpenPhotoshop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOpenPhotoshop.UseVisualStyleBackColor = true;
