@@ -32,6 +32,9 @@ namespace PictureViewer
             buttonCropManual.Enabled = false;
             buttonSelectArea.Enabled = false;
             buttonOpenPhotoshop.Enabled = false;
+            textBoxNote.Enabled = false;
+            buttonAddNote.Enabled = false;
+            buttonRemoveNote.Enabled = false;
         }
 
         public Main(string fileStr)
@@ -52,6 +55,9 @@ namespace PictureViewer
                 buttonUndo.Enabled = false;
                 buttonCropManual.Enabled = false;
                 buttonSelectArea.Enabled = true;
+                textBoxNote.Enabled = true;
+                buttonAddNote.Enabled = true;
+                buttonRemoveNote.Enabled = true;
             }
         }
 
@@ -75,10 +81,13 @@ namespace PictureViewer
                 buttonUndo.Enabled = false;
                 buttonSelectArea.Enabled = true;
                 buttonCropManual.Enabled = false;
+                textBoxNote.Enabled = true;
+                buttonAddNote.Enabled = true;
+                buttonRemoveNote.Enabled = true;
             }
         }
 
-        private void PrinyItemMenu_Click(object sender, EventArgs e)
+        private void PrintItemMenu_Click(object sender, EventArgs e)
         {
             Print();
         }
