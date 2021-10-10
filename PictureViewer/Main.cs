@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -11,9 +12,9 @@ namespace PictureViewer
 {
     public partial class Main : Form
     {
-        private Bitmap sourceImg = null;
-        private string pathCrop = null;
-        private string currPath = null;
+        private readonly string TEMP_PATH_FILE = Path.Combine(Path.GetTempPath(), "temp.png");
+        private readonly Stack<Bitmap> stackImage = new Stack<Bitmap>();
+        private bool isImageLoaded = false;
 
         private bool manualCrop = false;
         private int cropX;
@@ -44,10 +45,9 @@ namespace PictureViewer
             string extension = file.Extension;
             if (file.Exists && (extension.Equals(".png") || extension.Equals(".jpg") || extension.Equals(".bmp")))
             {
+                isImageLoaded = true;
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                currPath = fileStr;
                 pictureBox.Load(fileStr);
-                pathCrop = Path.GetDirectoryName(currPath) + "\\temp.png";
                 buttonPrint.Enabled = true;
                 buttonOpenPhotoshop.Enabled = true;
                 buttonCropNormal.Enabled = true;
@@ -55,6 +55,28 @@ namespace PictureViewer
                 buttonUndo.Enabled = false;
                 buttonCropManual.Enabled = false;
                 buttonSelectArea.Enabled = true;
+                textBoxNote.Enabled = true;
+                buttonAddNote.Enabled = true;
+                buttonRemoveNote.Enabled = true;
+            }
+        }
+
+
+        private void OpenItemMenu_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                isImageLoaded = true;
+                stackImage.Clear();
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.Load(openFileDialog.FileName);
+                buttonPrint.Enabled = true;
+                buttonOpenPhotoshop.Enabled = true;
+                buttonCropNormal.Enabled = true;
+                buttonCropFace.Enabled = true;
+                buttonUndo.Enabled = false;
+                buttonSelectArea.Enabled = true;
+                buttonCropManual.Enabled = false;
                 textBoxNote.Enabled = true;
                 buttonAddNote.Enabled = true;
                 buttonRemoveNote.Enabled = true;
@@ -64,27 +86,6 @@ namespace PictureViewer
         private void ButtonPrint_Click(object sender, EventArgs e)
         {
             Print();
-        }
-
-        private void OpenItemMenu_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                currPath = openFileDialog.FileName;
-                pictureBox.Load(currPath);
-                pathCrop = Path.GetDirectoryName(currPath) + "\\temp.png";
-                buttonPrint.Enabled = true;
-                buttonOpenPhotoshop.Enabled = true;
-                buttonCropNormal.Enabled = true;
-                buttonCropFace.Enabled = true;
-                buttonUndo.Enabled = false;
-                buttonSelectArea.Enabled = true;
-                buttonCropManual.Enabled = false;
-                textBoxNote.Enabled = true;
-                buttonAddNote.Enabled = true;
-                buttonRemoveNote.Enabled = true;
-            }
         }
 
         private void PrintItemMenu_Click(object sender, EventArgs e)
@@ -97,36 +98,36 @@ namespace PictureViewer
             Application.Exit();
         }
 
+        private void CreateTempFile()
+        {
+            Bitmap target = pictureBox.Image as Bitmap;
+            target.Save(TEMP_PATH_FILE, ImageFormat.Png);
+        }
+
         private void Print()
         {
             var p = new Process();
-            if (currPath == null || pathCrop == null)
+            if (!isImageLoaded)
             {
                 MessageBox.Show("Không có ảnh để in");
                 return;
             }
-            if (buttonUndo.Enabled)
-            {
-                p.StartInfo.FileName = pathCrop;
-            }
-            else
-            {
-                p.StartInfo.FileName = currPath;
-            }
+            CreateTempFile();
+            p.StartInfo.FileName = TEMP_PATH_FILE;
             p.StartInfo.Verb = "Print";
             p.Start();
         }
 
         private void ButtonCropNormal_Click(object sender, EventArgs e)
         {
-            sourceImg = pictureBox.Image as Bitmap;
+            Bitmap currentImage = pictureBox.Image as Bitmap;
+            stackImage.Push(currentImage);
             Rectangle cropRect = new Rectangle(500, 105, 1005, 710);
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+                g.DrawImage(currentImage, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonUndo.Enabled = true;
             buttonCropNormal.Enabled = false;
@@ -135,14 +136,14 @@ namespace PictureViewer
 
         private void ButtonCropFace_Click(object sender, EventArgs e)
         {
-            sourceImg = pictureBox.Image as Bitmap;
+            Bitmap currentImage = pictureBox.Image as Bitmap;
+            stackImage.Push(currentImage);
             Rectangle cropRect = new Rectangle(530, 65, 850, 850);
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+                g.DrawImage(currentImage, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
@@ -151,10 +152,13 @@ namespace PictureViewer
 
         private void ButtonUndo_Click(object sender, EventArgs e)
         {
-            pictureBox.Image = sourceImg;
-            buttonCropNormal.Enabled = true;
-            buttonCropFace.Enabled = true;
-            buttonUndo.Enabled = false;
+            pictureBox.Image = stackImage.Pop();
+            if (stackImage.Count == 0)
+            {
+                buttonCropNormal.Enabled = true;
+                buttonCropFace.Enabled = true;
+                buttonUndo.Enabled = false;
+            }
         }
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -233,11 +237,12 @@ namespace PictureViewer
             pictureBox.Refresh();
             buttonCropManual.Enabled = false;
 
-            sourceImg = pictureBox.Image as Bitmap;
+            Bitmap currentImage = pictureBox.Image as Bitmap;
+            stackImage.Push(currentImage);
 
             Size clientSize = pictureBox.Size;
-            float ratioWidth = ((float)sourceImg.Width) / ((float)clientSize.Width);
-            float ratioHeight = ((float)sourceImg.Height) / ((float)clientSize.Height);
+            float ratioWidth = ((float)currentImage.Width) / ((float)clientSize.Width);
+            float ratioHeight = ((float)currentImage.Height) / ((float)clientSize.Height);
             cropX = (int)(Math.Round(cropX * ratioWidth));
             cropY = (int)(Math.Round(cropY * ratioHeight));
             cropWidth = (int)(Math.Round(cropWidth * ratioWidth));
@@ -247,9 +252,8 @@ namespace PictureViewer
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(sourceImg, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
+                g.DrawImage(currentImage, new Rectangle(0, 0, target.Width, target.Height), cropRect, GraphicsUnit.Pixel);
             }
-            target.Save(pathCrop, ImageFormat.Png);
             pictureBox.Image = target;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
@@ -278,7 +282,7 @@ namespace PictureViewer
                 );
                 return;
             }
-            if (currPath == null || pathCrop == null)
+            if (!isImageLoaded)
             {
                 MessageBox.Show("Không có ảnh để mở");
                 return;
@@ -286,14 +290,8 @@ namespace PictureViewer
 
             var p = new Process();
             p.StartInfo.FileName = photoshopLocation;
-            if (buttonUndo.Enabled)
-            {
-                p.StartInfo.Arguments = pathCrop;
-            }
-            else
-            {
-                p.StartInfo.Arguments = currPath;
-            }
+            CreateTempFile();
+            p.StartInfo.Arguments = TEMP_PATH_FILE;
             p.Start();
         }
 
@@ -313,9 +311,9 @@ namespace PictureViewer
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (File.Exists(pathCrop))
+            if (File.Exists(TEMP_PATH_FILE))
             {
-                File.Delete(pathCrop);
+                File.Delete(TEMP_PATH_FILE);
             }
         }
     }
