@@ -49,6 +49,7 @@
             this.textBoxNote = new System.Windows.Forms.TextBox();
             this.buttonAddNote = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.buttonPaste = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -134,7 +135,8 @@
             this.tableLayout.Controls.Add(this.buttonOpenPhotoshop, 2, 2);
             this.tableLayout.Controls.Add(this.label1, 0, 3);
             this.tableLayout.Controls.Add(this.textBoxNote, 1, 3);
-            this.tableLayout.Controls.Add(this.buttonAddNote, 8, 3);
+            this.tableLayout.Controls.Add(this.buttonAddNote, 3, 3);
+            this.tableLayout.Controls.Add(this.buttonPaste, 2, 3);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 24);
             this.tableLayout.Name = "tableLayout";
@@ -289,27 +291,40 @@
             // 
             // textBoxNote
             // 
-            this.tableLayout.SetColumnSpan(this.textBoxNote, 8);
+            this.tableLayout.SetColumnSpan(this.textBoxNote, 7);
             this.textBoxNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNote.Location = new System.Drawing.Point(93, 725);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(714, 29);
+            this.textBoxNote.Size = new System.Drawing.Size(624, 29);
             this.textBoxNote.TabIndex = 9;
             this.textBoxNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxNote_KeyDown);
             // 
             // buttonAddNote
             // 
-            this.tableLayout.SetColumnSpan(this.buttonAddNote, 3);
+            this.tableLayout.SetColumnSpan(this.buttonAddNote, 2);
             this.buttonAddNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonAddNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddNote.Location = new System.Drawing.Point(813, 725);
+            this.buttonAddNote.Location = new System.Drawing.Point(903, 725);
             this.buttonAddNote.Name = "buttonAddNote";
-            this.buttonAddNote.Size = new System.Drawing.Size(268, 29);
-            this.buttonAddNote.TabIndex = 10;
+            this.buttonAddNote.Size = new System.Drawing.Size(178, 29);
+            this.buttonAddNote.TabIndex = 11;
             this.buttonAddNote.Text = "Thêm ghi chú";
             this.buttonAddNote.UseVisualStyleBackColor = true;
             this.buttonAddNote.Click += new System.EventHandler(this.ButtonAddNote_Click);
+            // 
+            // buttonPaste
+            // 
+            this.tableLayout.SetColumnSpan(this.buttonPaste, 2);
+            this.buttonPaste.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonPaste.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPaste.Location = new System.Drawing.Point(723, 725);
+            this.buttonPaste.Name = "buttonPaste";
+            this.buttonPaste.Size = new System.Drawing.Size(174, 29);
+            this.buttonPaste.TabIndex = 10;
+            this.buttonPaste.Text = "Dán";
+            this.buttonPaste.UseVisualStyleBackColor = true;
+            this.buttonPaste.Click += new System.EventHandler(this.ButtonPaste_Click);
             // 
             // Main
             // 
@@ -357,6 +372,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNote;
         private System.Windows.Forms.Button buttonAddNote;
+        private System.Windows.Forms.Button buttonPaste;
     }
 }
 

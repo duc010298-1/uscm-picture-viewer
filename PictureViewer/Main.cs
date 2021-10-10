@@ -39,6 +39,7 @@ namespace PictureViewer
             buttonSelectArea.Enabled = false;
             buttonOpenPhotoshop.Enabled = false;
             textBoxNote.Enabled = false;
+            buttonPaste.Enabled = false;
             buttonAddNote.Enabled = false;
         }
 
@@ -60,6 +61,7 @@ namespace PictureViewer
                 buttonCropManual.Enabled = false;
                 buttonSelectArea.Enabled = true;
                 textBoxNote.Enabled = true;
+                buttonPaste.Enabled = true;
                 buttonAddNote.Enabled = true;
             }
         }
@@ -81,6 +83,7 @@ namespace PictureViewer
                 buttonSelectArea.Enabled = true;
                 buttonCropManual.Enabled = false;
                 textBoxNote.Enabled = true;
+                buttonPaste.Enabled = true;
                 buttonAddNote.Enabled = true;
                 textBoxNote.Text = "";
             }
@@ -162,6 +165,21 @@ namespace PictureViewer
                 {
                     AddNote(text);
                 }
+            }
+        }
+
+        private void ButtonPaste_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
+
+        private void Paste()
+        {
+            if (Clipboard.ContainsText(TextDataFormat.Text) && isImageLoaded)
+            {
+                string clipboardText = Clipboard.GetText(TextDataFormat.UnicodeText);
+                textBoxNote.Text = clipboardText;
+                AddNote(clipboardText);
             }
         }
 
