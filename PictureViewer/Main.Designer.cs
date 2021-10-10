@@ -48,7 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNote = new System.Windows.Forms.TextBox();
             this.buttonAddNote = new System.Windows.Forms.Button();
-            this.buttonRemoveNote = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
@@ -136,7 +135,6 @@
             this.tableLayout.Controls.Add(this.label1, 0, 3);
             this.tableLayout.Controls.Add(this.textBoxNote, 1, 3);
             this.tableLayout.Controls.Add(this.buttonAddNote, 8, 3);
-            this.tableLayout.Controls.Add(this.buttonRemoveNote, 10, 3);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 24);
             this.tableLayout.Name = "tableLayout";
@@ -291,37 +289,27 @@
             // 
             // textBoxNote
             // 
-            this.tableLayout.SetColumnSpan(this.textBoxNote, 7);
+            this.tableLayout.SetColumnSpan(this.textBoxNote, 8);
             this.textBoxNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNote.Location = new System.Drawing.Point(93, 725);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(624, 29);
+            this.textBoxNote.Size = new System.Drawing.Size(714, 29);
             this.textBoxNote.TabIndex = 9;
+            this.textBoxNote.Text = "Đỗ Trung Đức";
             // 
             // buttonAddNote
             // 
-            this.tableLayout.SetColumnSpan(this.buttonAddNote, 2);
+            this.tableLayout.SetColumnSpan(this.buttonAddNote, 3);
             this.buttonAddNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonAddNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddNote.Location = new System.Drawing.Point(723, 725);
+            this.buttonAddNote.Location = new System.Drawing.Point(813, 725);
             this.buttonAddNote.Name = "buttonAddNote";
-            this.buttonAddNote.Size = new System.Drawing.Size(174, 29);
+            this.buttonAddNote.Size = new System.Drawing.Size(268, 29);
             this.buttonAddNote.TabIndex = 10;
             this.buttonAddNote.Text = "Thêm ghi chú";
             this.buttonAddNote.UseVisualStyleBackColor = true;
-            // 
-            // buttonRemoveNote
-            // 
-            this.tableLayout.SetColumnSpan(this.buttonRemoveNote, 2);
-            this.buttonRemoveNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRemoveNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRemoveNote.Location = new System.Drawing.Point(903, 725);
-            this.buttonRemoveNote.Name = "buttonRemoveNote";
-            this.buttonRemoveNote.Size = new System.Drawing.Size(178, 29);
-            this.buttonRemoveNote.TabIndex = 11;
-            this.buttonRemoveNote.Text = "Xóa ghi chú";
-            this.buttonRemoveNote.UseVisualStyleBackColor = true;
+            this.buttonAddNote.Click += new System.EventHandler(this.ButtonAddNote_Click);
             // 
             // Main
             // 
@@ -369,7 +357,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNote;
         private System.Windows.Forms.Button buttonAddNote;
-        private System.Windows.Forms.Button buttonRemoveNote;
     }
 }
 

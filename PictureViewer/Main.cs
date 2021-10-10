@@ -21,7 +21,12 @@ namespace PictureViewer
         private int cropY;
         private int cropWidth;
         private int cropHeight;
-        private Pen cropPen = new Pen(Color.DarkGray, 1);
+        private Pen cropPen;
+
+        private readonly Font drawFont = new Font("Segoe UI", 20);
+        private readonly SolidBrush blueBrushFillText = new SolidBrush(Color.FromArgb(3, 3, 3));
+        private readonly Pen penBorderText = new Pen(Color.FromArgb(83, 83, 83), 2);
+        private readonly Brush brushText = new SolidBrush(Color.FromArgb(45, 210, 51));
 
         public Main()
         {
@@ -35,7 +40,6 @@ namespace PictureViewer
             buttonOpenPhotoshop.Enabled = false;
             textBoxNote.Enabled = false;
             buttonAddNote.Enabled = false;
-            buttonRemoveNote.Enabled = false;
         }
 
         public Main(string fileStr)
@@ -57,7 +61,6 @@ namespace PictureViewer
                 buttonSelectArea.Enabled = true;
                 textBoxNote.Enabled = true;
                 buttonAddNote.Enabled = true;
-                buttonRemoveNote.Enabled = true;
             }
         }
 
@@ -79,7 +82,6 @@ namespace PictureViewer
                 buttonCropManual.Enabled = false;
                 textBoxNote.Enabled = true;
                 buttonAddNote.Enabled = true;
-                buttonRemoveNote.Enabled = true;
             }
         }
 
@@ -147,6 +149,31 @@ namespace PictureViewer
             pictureBox.Image = target;
             buttonCropNormal.Enabled = false;
             buttonCropFace.Enabled = false;
+            buttonUndo.Enabled = true;
+        }
+
+        private void ButtonAddNote_Click(object sender, EventArgs e)
+        {
+            string text = textBoxNote.Text.Trim();
+            if (String.IsNullOrEmpty(text))
+            {
+                MessageBox.Show("Không có ghi chú để thêm");
+                return;
+            }
+
+            Bitmap currentImage = pictureBox.Image as Bitmap;
+            stackImage.Push(currentImage);
+            Bitmap target = (Bitmap)currentImage.Clone();
+            using (Graphics g = Graphics.FromImage(target))
+            {
+                SizeF stringSize = g.MeasureString(text, drawFont);
+                int rectWidth = (int)stringSize.Width + 6;
+                Rectangle textRect = new Rectangle(5, 8, rectWidth, 40);
+                g.FillRectangle(blueBrushFillText, textRect);
+                g.DrawRectangle(penBorderText, textRect);
+                g.DrawString(text, drawFont, brushText, new RectangleF(8, 8, rectWidth, 40));
+            }
+            pictureBox.Image = target;
             buttonUndo.Enabled = true;
         }
 
