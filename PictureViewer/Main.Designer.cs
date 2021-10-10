@@ -296,7 +296,7 @@
             this.textBoxNote.Name = "textBoxNote";
             this.textBoxNote.Size = new System.Drawing.Size(714, 29);
             this.textBoxNote.TabIndex = 9;
-            this.textBoxNote.Text = "Đỗ Trung Đức";
+            this.textBoxNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxNote_KeyDown);
             // 
             // buttonAddNote
             // 

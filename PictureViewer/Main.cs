@@ -82,6 +82,7 @@ namespace PictureViewer
                 buttonCropManual.Enabled = false;
                 textBoxNote.Enabled = true;
                 buttonAddNote.Enabled = true;
+                textBoxNote.Text = "";
             }
         }
 
@@ -152,6 +153,18 @@ namespace PictureViewer
             buttonUndo.Enabled = true;
         }
 
+        private void TextBoxNote_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string text = textBoxNote.Text.Trim();
+                if (!String.IsNullOrEmpty(text))
+                {
+                    AddNote(text);
+                }
+            }
+        }
+
         private void ButtonAddNote_Click(object sender, EventArgs e)
         {
             string text = textBoxNote.Text.Trim();
@@ -160,7 +173,11 @@ namespace PictureViewer
                 MessageBox.Show("Không có ghi chú để thêm");
                 return;
             }
+            AddNote(text);
+        }
 
+        private void AddNote(string text)
+        {
             Bitmap currentImage = pictureBox.Image as Bitmap;
             stackImage.Push(currentImage);
             Bitmap target = (Bitmap)currentImage.Clone();
