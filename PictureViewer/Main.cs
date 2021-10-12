@@ -23,7 +23,7 @@ namespace PictureViewer
         private int cropHeight;
         private Pen cropPen;
 
-        private readonly Font drawFont = new Font("Segoe UI", 20);
+        private readonly Font drawFont = new Font("Segoe UI", 21);
         private readonly SolidBrush blueBrushFillText = new SolidBrush(Color.FromArgb(3, 3, 3));
         private readonly Pen penBorderText = new Pen(Color.FromArgb(83, 83, 83), 2);
         private readonly Brush brushText = new SolidBrush(Color.FromArgb(45, 210, 51));
