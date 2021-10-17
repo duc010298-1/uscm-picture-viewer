@@ -163,7 +163,7 @@ namespace PictureViewer
                 string text = textBoxNote.Text.Trim();
                 if (!String.IsNullOrEmpty(text))
                 {
-                    AddNote(text);
+                    AddNote();
                 }
             }
         }
@@ -177,9 +177,8 @@ namespace PictureViewer
         {
             if (Clipboard.ContainsText(TextDataFormat.Text) && isImageLoaded)
             {
-                string clipboardText = Clipboard.GetText(TextDataFormat.UnicodeText);
-                textBoxNote.Text = clipboardText;
-                AddNote(clipboardText);
+                textBoxNote.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                AddNote();
             }
         }
 
@@ -191,22 +190,34 @@ namespace PictureViewer
                 MessageBox.Show("Không có ghi chú để thêm");
                 return;
             }
-            AddNote(text);
+            AddNote();
         }
 
-        private void AddNote(string text)
+        private void AddNote()
         {
+            String name = textBoxNote.Text;
+            String date = DateTime.Now.ToString("dd/MM/yy");
             Bitmap currentImage = pictureBox.Image as Bitmap;
             stackImage.Push(currentImage);
             Bitmap target = (Bitmap)currentImage.Clone();
             using (Graphics g = Graphics.FromImage(target))
             {
-                SizeF stringSize = g.MeasureString(text, drawFont);
-                int rectWidth = (int)stringSize.Width + 6;
-                Rectangle textRect = new Rectangle(5, 8, rectWidth, 40);
-                g.FillRectangle(blueBrushFillText, textRect);
-                g.DrawRectangle(penBorderText, textRect);
-                g.DrawString(text, drawFont, brushText, new RectangleF(8, 8, rectWidth, 40));
+                // draw name
+                SizeF nameSize = g.MeasureString(name, drawFont);
+                int rectNameWidth = (int)nameSize.Width + 6;
+                Rectangle nameRect = new Rectangle(5, 8, rectNameWidth, 48);
+                g.FillRectangle(blueBrushFillText, nameRect);
+                g.DrawRectangle(penBorderText, nameRect);
+                g.DrawString(name, drawFont, brushText, new RectangleF(8, 8, rectNameWidth, 48));
+
+                // draw date
+                SizeF dateSize = g.MeasureString(date, drawFont);
+                int rectDateWidth = (int)dateSize.Width + 6;
+                int xPointDate = currentImage.Width - rectDateWidth - 5;
+                Rectangle dateRect = new Rectangle(xPointDate, 8, rectDateWidth, 48);
+                g.FillRectangle(blueBrushFillText, dateRect);
+                g.DrawRectangle(penBorderText, dateRect);
+                g.DrawString(date, drawFont, brushText, new RectangleF(xPointDate + 3, 8, rectDateWidth, 48));
             }
             pictureBox.Image = target;
             buttonUndo.Enabled = true;
