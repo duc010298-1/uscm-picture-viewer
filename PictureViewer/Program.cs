@@ -47,6 +47,7 @@ namespace PictureViewer
             appReg.CreateSubKey(@"shell\edit\command").SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
             appReg.CreateSubKey("DefaultIcon").SetValue("", icoPath);
             appReg.CreateSubKey("PhotoshopLocation").SetValue("path", "null");
+            appReg.CreateSubKey("Credential").SetValue("token", "null");
 
             var jpgReg = Registry.CurrentUser.OpenSubKey(@"Software\Classes\.jpg\DefaultIcon", true);
             if (jpgReg == null)

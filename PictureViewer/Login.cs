@@ -9,7 +9,7 @@ namespace PictureViewer
 {
     public partial class Login : Form
     {
-        private readonly string authEndPoint = "http://localhost:8000/api/token/";
+        private readonly string AUTH_ENDPOINT = "http://localhost:8000/api/token/";
 
         public Login()
         {
@@ -28,7 +28,7 @@ namespace PictureViewer
                         { "password", password }
                     };
                 var content = new FormUrlEncodedContent(values);
-                var response = await Main.httpClient.PostAsync(authEndPoint, content);
+                var response = await Main.httpClient.PostAsync(AUTH_ENDPOINT, content);
                 string code = response.StatusCode.ToString();
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (code != "OK")
@@ -43,7 +43,7 @@ namespace PictureViewer
                 else
                 {
                     var credential = JObject.Parse(responseString);
-                    Console.WriteLine(credential["access"]);
+                    Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", credential["access"]));
                     Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\Credential", true)
                         .SetValue("token", credential["access"]);
                     MessageBox.Show("Đăng nhập thành công",
@@ -90,7 +90,7 @@ namespace PictureViewer
         {
             if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                LoginButton_Click(sender, e);
             }
         }
     }

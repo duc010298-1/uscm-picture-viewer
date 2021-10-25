@@ -15,8 +15,10 @@ namespace PictureViewer
     public partial class Main : Form
     {
         private readonly string TEMP_PATH_FILE = Path.Combine(Path.GetTempPath(), "temp.png");
+        private readonly string UPLOAD_IMAGE_URL = "http://localhost:8000/common/new-image/";
         public static readonly HttpClient httpClient = new HttpClient();
         private readonly Stack<Bitmap> stackImage = new Stack<Bitmap>();
+        private string currentImageDir;
         private bool isImageLoaded = false;
 
         private bool manualCrop = false;
@@ -44,11 +46,13 @@ namespace PictureViewer
             textBoxNote.Enabled = false;
             buttonPaste.Enabled = false;
             buttonAddNote.Enabled = false;
+            SetHeader();
         }
 
         public Main(string fileStr)
         {
             InitializeComponent();
+            currentImageDir = fileStr;
             FileInfo file = new FileInfo(fileStr);
             string extension = file.Extension;
             if (file.Exists && (extension.Equals(".png") || extension.Equals(".jpg") || extension.Equals(".bmp")))
@@ -67,6 +71,18 @@ namespace PictureViewer
                 buttonPaste.Enabled = true;
                 buttonAddNote.Enabled = true;
             }
+            SetHeader();
+        }
+
+        private void SetHeader()
+        {
+            var subKey = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\Credential", true);
+            if (subKey == null)
+            {
+                return;
+            }
+            string token = (string)subKey.GetValue("token");
+            Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
         }
 
 
@@ -74,6 +90,7 @@ namespace PictureViewer
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                currentImageDir = openFileDialog.FileName;
                 isImageLoaded = true;
                 stackImage.Clear();
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -197,15 +214,14 @@ namespace PictureViewer
             return text.Substring(0, text.Length - 16).Trim();
         }
 
-        private void SendRequestUpload(string code)
+        private async void SendRequestUpload(string code)
         {
-            var subKey = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\Credential", true);
-            if (subKey == null)
+            using (var formData = new MultipartFormDataContent())
             {
-                return;
+                formData.Add(new StringContent(code), "code");
+                formData.Add(new ByteArrayContent(File.ReadAllBytes(currentImageDir)), "file", Path.GetFileName(currentImageDir));
+                await Main.httpClient.PostAsync(UPLOAD_IMAGE_URL, formData);
             }
-            string token = (string)subKey.GetValue("token");
-            Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
         }
 
         private void ButtonAddNote_Click(object sender, EventArgs e)
