@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace PictureViewer
     public partial class Main : Form
     {
         private readonly string TEMP_PATH_FILE = Path.Combine(Path.GetTempPath(), "temp.png");
+        public static readonly HttpClient httpClient = new HttpClient();
         private readonly Stack<Bitmap> stackImage = new Stack<Bitmap>();
         private bool isImageLoaded = false;
 
@@ -192,16 +194,18 @@ namespace PictureViewer
             {
                 SendRequestUpload(text.Substring(text.Length - 13, 13));
             }
-            return text.Substring(0, text.Length - 16);
+            return text.Substring(0, text.Length - 16).Trim();
         }
 
         private void SendRequestUpload(string code)
         {
-            //TODO coding here
-            MessageBox.Show(code,
-                "Thông báo",
-                MessageBoxButtons.OK
-            );
+            var subKey = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\Credential", true);
+            if (subKey == null)
+            {
+                return;
+            }
+            string token = (string)subKey.GetValue("token");
+            Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
         }
 
         private void ButtonAddNote_Click(object sender, EventArgs e)
@@ -414,7 +418,8 @@ namespace PictureViewer
 
         private void LoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Login loginForm = new Login();
+            loginForm.ShowDialog();
         }
     }
 }
