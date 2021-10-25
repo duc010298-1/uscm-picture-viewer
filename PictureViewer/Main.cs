@@ -411,5 +411,10 @@ namespace PictureViewer
                 File.Delete(TEMP_PATH_FILE);
             }
         }
+
+        private void LoginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

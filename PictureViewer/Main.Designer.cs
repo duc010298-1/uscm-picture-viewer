@@ -48,8 +48,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNote = new System.Windows.Forms.TextBox();
             this.buttonAddNote = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.buttonPaste = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -71,6 +72,7 @@
             this.openItemMenu,
             this.printItemMenu,
             this.setPhotoshopLocationToolStripMenuItem,
+            this.loginToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitItemMenu});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
@@ -326,6 +328,13 @@
             this.buttonPaste.UseVisualStyleBackColor = true;
             this.buttonPaste.Click += new System.EventHandler(this.ButtonPaste_Click);
             // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.loginToolStripMenuItem.Text = "Đăng nhập";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.LoginToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +382,7 @@
         private System.Windows.Forms.TextBox textBoxNote;
         private System.Windows.Forms.Button buttonAddNote;
         private System.Windows.Forms.Button buttonPaste;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
     }
 }
 
