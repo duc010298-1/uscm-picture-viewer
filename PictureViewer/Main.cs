@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PictureViewer
@@ -177,9 +178,30 @@ namespace PictureViewer
         {
             if (Clipboard.ContainsText(TextDataFormat.Text) && isImageLoaded)
             {
-                textBoxNote.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                string text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                text = ProcessTextCopy(text);
+                textBoxNote.Text = text;
                 AddNote();
             }
+        }
+
+        private string ProcessTextCopy(string text)
+        {
+            string regex = @"^.+ \| pks[0-9]{10}$";
+            if (Regex.IsMatch(text, regex))
+            {
+                SendRequestUpload(text.Substring(text.Length - 13, 13));
+            }
+            return text.Substring(0, text.Length - 16);
+        }
+
+        private void SendRequestUpload(string code)
+        {
+            //TODO coding here
+            MessageBox.Show(code,
+                "Thông báo",
+                MessageBoxButtons.OK
+            );
         }
 
         private void ButtonAddNote_Click(object sender, EventArgs e)
