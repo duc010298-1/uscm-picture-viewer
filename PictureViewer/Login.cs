@@ -9,7 +9,7 @@ namespace PictureViewer
 {
     public partial class Login : Form
     {
-        private readonly string AUTH_ENDPOINT = "http://localhost:8000/api/token/";
+        private readonly string AUTH_ENDPOINT = "https://phongkhamsan158.ddns.net/uscm-api/api/token/";
 
         public Login()
         {

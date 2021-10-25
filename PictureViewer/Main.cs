@@ -15,7 +15,7 @@ namespace PictureViewer
     public partial class Main : Form
     {
         private readonly string TEMP_PATH_FILE = Path.Combine(Path.GetTempPath(), "temp.png");
-        private readonly string UPLOAD_IMAGE_URL = "http://localhost:8000/common/new-image/";
+        private readonly string UPLOAD_IMAGE_URL = "https://phongkhamsan158.ddns.net/uscm-api/common/new-image/";
         public static readonly HttpClient httpClient = new HttpClient();
         private readonly Stack<Bitmap> stackImage = new Stack<Bitmap>();
         private string currentImageDir;
@@ -210,8 +210,9 @@ namespace PictureViewer
             if (Regex.IsMatch(text, regex))
             {
                 SendRequestUpload(text.Substring(text.Length - 13, 13));
+                text = text.Substring(0, text.Length - 16).Trim();
             }
-            return text.Substring(0, text.Length - 16).Trim();
+            return text;
         }
 
         private async void SendRequestUpload(string code)
