@@ -184,6 +184,8 @@ namespace PictureViewer
                 string text = textBoxNote.Text.Trim();
                 if (!String.IsNullOrEmpty(text))
                 {
+                    text = ProcessTextCopy(text);
+                    textBoxNote.Text = text;
                     AddNote();
                 }
             }
