@@ -43,6 +43,7 @@ namespace PictureViewer
                 else
                 {
                     var credential = JObject.Parse(responseString);
+                    Main.httpClient.DefaultRequestHeaders.Remove("Authorization");
                     Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", credential["access"]));
                     Registry.CurrentUser.OpenSubKey(@"Software\Classes\Applications\PictureViewer.exe\Credential", true)
                         .SetValue("token", credential["access"]);

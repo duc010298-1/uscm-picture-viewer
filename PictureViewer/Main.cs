@@ -82,6 +82,7 @@ namespace PictureViewer
                 return;
             }
             string token = (string)subKey.GetValue("token");
+            Main.httpClient.DefaultRequestHeaders.Remove("Authorization");
             Main.httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
         }
 
