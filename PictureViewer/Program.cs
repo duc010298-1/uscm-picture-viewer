@@ -13,10 +13,10 @@ namespace PictureViewer
         [STAThread]
         static void Main(String[] args)
         {
-            //if (CheckRegistry())
-            //{
-            //    AddRegistry();
-            //}
+            if (CheckRegistry())
+            {
+                AddRegistry();
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
