@@ -204,6 +204,7 @@ namespace PictureViewer
                 text = ProcessTextCopy(text);
                 textBoxNote.Text = text;
                 AddNote();
+                Clipboard.SetText(" ");
             }
         }
 
