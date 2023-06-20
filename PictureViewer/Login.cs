@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Windows.Forms;
 
@@ -9,7 +10,7 @@ namespace PictureViewer
 {
     public partial class Login : Form
     {
-        private readonly string AUTH_ENDPOINT = "http://10.12.98.7/uscm-api/api/token/";
+        private readonly string AUTH_ENDPOINT = ConfigurationManager.AppSettings["PKSServerHost"] + "/uscm-api/api/token/";
 
         public Login()
         {

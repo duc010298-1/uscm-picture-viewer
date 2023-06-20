@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -15,7 +16,7 @@ namespace PictureViewer
     public partial class Main : Form
     {
         private readonly string TEMP_PATH_FILE = Path.Combine(Path.GetTempPath(), "temp.png");
-        private readonly string UPLOAD_IMAGE_URL = "http://10.12.98.7/uscm-api/common/new-image/";
+        private readonly string UPLOAD_IMAGE_URL = ConfigurationManager.AppSettings["PKSServerHost"] + "/uscm-api/common/new-image/";
         public static readonly HttpClient httpClient = new HttpClient();
         private readonly Stack<Bitmap> stackImage = new Stack<Bitmap>();
         private string currentImageDir;
